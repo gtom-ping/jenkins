@@ -10,17 +10,14 @@ spec:
     image: 574076504146.dkr.ecr.us-west-2.amazonaws.com/snapshot-builds/pingdatagovernance:latest
     # image: '574076504146.dkr.ecr.us-west-2.amazonaws.com/snapshot-builds/pingdatagovernance:8.3.0.0-SNAPSHOT-alpine-az11-20210112'
     # image: pingidentity/pingdatagovernance:latest
-    env: 
+    envs: 
       - name: SERVER_PROFILE_URL
         value: "https://github.com/pingidentity/pingidentity-server-profiles.git"
       - name: SERVER_PROFILE_PATH
         value: "getting-started/pingdatagovernance"
       - name: PING_IDENTITY_ACCEPT_EULA
         value: "YES"
-      - name: PING_IDENTITY_DEVOPS_USER
-        value: "${PING_IDENTITY_DEVOPS_USER}"
-      - name: PING_IDENTITY_DEVOPS_KEY
-        value: "${PING_IDENTITY_DEVOPS_KEY}"
+      - env_vars
     alwaysPullImage: true
     ports:
       - containerPort: 80
@@ -29,27 +26,15 @@ spec:
 
   - name: jmeter
     image: justb4/jmeter
-    # resources:
-    #   limits:
-    #     memory: "1g"
-    #     cpu: "500m"
     ttyEnabled: true
     command: ["cat"]
 
   - name: upstream-api
     image: samirgandhi/dg-qa-upstream-api
-    # resources:
-    #   limits:
-    #     memory: "1g"
-    #     cpu: "500m"
     ports:
       - containerPort: 3000
 
   - name: dataconsole
     image: 'pingidentity/pingdataconsole:edge'
-    # resources:
-    #   limits:
-    #     memory: "1g"
-    #     cpu: "500m"
     ports:
       - containerPort: 8443 
