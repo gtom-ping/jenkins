@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: DG Performance Pod
+  labels:
+    name: dg-performance-pod
+spec:
+  containers:
+  - name: datagovernance
+    image: 574076504146.dkr.ecr.us-west-2.amazonaws.com/snapshot-builds/pingdatagovernance:latest
+    # image: '574076504146.dkr.ecr.us-west-2.amazonaws.com/snapshot-builds/pingdatagovernance:8.3.0.0-SNAPSHOT-alpine-az11-20210112'
+    # image: pingidentity/pingdatagovernance:latest
+    env: 
+      - name: SERVER_PROFILE_URL
+        value: "https://github.com/pingidentity/pingidentity-server-profiles.git"
+      - name: SERVER_PROFILE_PATH
+        value: "getting-started/pingdatagovernance"
+      - name: PING_IDENTITY_ACCEPT_EULA
+        value: "YES"
+      - name: PING_IDENTITY_DEVOPS_USER
+        value: "${PING_IDENTITY_DEVOPS_USER}"
+      - name: PING_IDENTITY_DEVOPS_KEY
+        value: "${PING_IDENTITY_DEVOPS_KEY}"
+    alwaysPullImage: true
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+    ports:
+      - containerPort: 80
+      - containerPort: 443
+      - containerPort: 636
+
+  - name: jmeter
+    image: justb4/jmeter
+    ttyEnabled: true
+    command: cat
+
+  - name: upstream-api
+    image: samirgandhi/dg-qa-upstream-api
+    ports:
+      - containerPort: 3000
+
+  - name: dataconsole
+    image: 'pingidentity/pingdataconsole:edge'
+    ports:
+      - containerPort: 8443 
