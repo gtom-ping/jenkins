@@ -18,9 +18,9 @@ spec:
       - name: PING_IDENTITY_ACCEPT_EULA
         value: "YES"
       - name: PING_IDENTITY_DEVOPS_USER
-        value: '${PING_IDENTITY_DEVOPS_USER}'
+        value: ${PING_IDENTITY_DEVOPS_USER}
       - name: PING_IDENTITY_DEVOPS_KEY
-        value: '${PING_IDENTITY_DEVOPS_USER}'
+        value: ${PING_IDENTITY_DEVOPS_KEY}
     alwaysPullImage: true
     ports:
       - containerPort: 80
