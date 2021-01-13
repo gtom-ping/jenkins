@@ -18,14 +18,10 @@ spec:
       - name: PING_IDENTITY_ACCEPT_EULA
         value: "YES"
       - name: PING_IDENTITY_DEVOPS_USER
-        value: ${PING_IDENTITY_DEVOPS_USER}
+        value: "${PING_IDENTITY_DEVOPS_USER}"
       - name: PING_IDENTITY_DEVOPS_KEY
-        value: ${PING_IDENTITY_DEVOPS_USER}
+        value: "${PING_IDENTITY_DEVOPS_USER}"
     alwaysPullImage: true
-    # resources:
-    #   limits:
-    #     memory: "1g"
-    #     cpu: "500m"
     ports:
       - containerPort: 80
       - containerPort: 443
