@@ -22,10 +22,10 @@ spec:
       - name: PING_IDENTITY_DEVOPS_KEY
         value: "${PING_IDENTITY_DEVOPS_KEY}"
     alwaysPullImage: true
-    resources:
-      limits:
-        memory: "1g"
-        cpu: "500m"
+    # resources:
+    #   limits:
+    #     memory: "1g"
+    #     cpu: "500m"
     ports:
       - containerPort: 80
       - containerPort: 443
@@ -33,27 +33,27 @@ spec:
 
   - name: jmeter
     image: justb4/jmeter
-    resources:
-      limits:
-        memory: "1g"
-        cpu: "500m"
+    # resources:
+    #   limits:
+    #     memory: "1g"
+    #     cpu: "500m"
     ttyEnabled: true
     command: ["cat"]
 
   - name: upstream-api
     image: samirgandhi/dg-qa-upstream-api
-    resources:
-      limits:
-        memory: "1g"
-        cpu: "500m"
+    # resources:
+    #   limits:
+    #     memory: "1g"
+    #     cpu: "500m"
     ports:
       - containerPort: 3000
 
   - name: dataconsole
     image: 'pingidentity/pingdataconsole:edge'
-    resources:
-      limits:
-        memory: "1g"
-        cpu: "500m"
+    # resources:
+    #   limits:
+    #     memory: "1g"
+    #     cpu: "500m"
     ports:
       - containerPort: 8443 
