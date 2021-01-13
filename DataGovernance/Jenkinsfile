@@ -7,8 +7,8 @@ pipeline {
 
     stages {
         stage('Run JMeter Test') {
-            container('jmeter') {
-                steps {
+            steps {
+                container('jmeter') {
                     git branch: 'main', url: 'https://github.com/gtom-ping/jmx-files'
                     sh '${JMETER_BIN}/jmeter -n -t SanityCheck8443.jmx -l results.csv'
                     perfReport errorFailedThreshold: 0, sourceDataFiles: 'results.csv'
