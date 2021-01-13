@@ -1,8 +1,9 @@
 pipeline {
+    configFileProvider([configFile(fileId: 'DEVOPS_KEY')]) {
+    }
+
     agent {
         kubernetes {
-            configFileProvider([configFile(fileId: 'DEVOPS_KEY')]) {
-            }
             yamlFile 'DataGovernance/KubernetesPod.yaml'
         }
     }
