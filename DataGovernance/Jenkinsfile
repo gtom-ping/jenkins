@@ -1,5 +1,6 @@
 pipeline {
-    configFileProvider([configFile(fileId: 'DEVOPS_KEY')]) {
+    configFileProvider([configFile(fileId: 'DEVOPS_KEY', targetLocation: 'env_vars')]) {
+        sh 'cat env_vars'
     }
 
     agent {
