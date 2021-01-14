@@ -7,19 +7,17 @@ metadata:
 spec:
   containers:
   - name: datagovernance
-    # image: 574076504146.dkr.ecr.us-west-2.amazonaws.com/snapshot-builds/pingdatagovernance:latest
+    image: 574076504146.dkr.ecr.us-west-2.amazonaws.com/snapshot-builds/pingdatagovernance:latest
     # image: '574076504146.dkr.ecr.us-west-2.amazonaws.com/snapshot-builds/pingdatagovernance:8.3.0.0-SNAPSHOT-alpine-az11-20210112'
-    image: pingidentity/pingdatagovernance:latest
+    # image: pingidentity/pingdatagovernance:latest
     imagePullPolicy: Always
     env: 
       - name: SERVER_PROFILE_URL
         value: https://github.com/pingidentity/pingidentity-server-profiles.git
       - name: SERVER_PROFILE_PATH
-        value: "getting-started/pingdatagovernance"
+        value: perf-testing/pingdatagovernance
       - name: PING_IDENTITY_ACCEPT_EULA
         value: "YES"
-      # - name: SERVER_PROFILE_BRANCH
-      #   value: "dg-root-pw"
     envFrom:
       - secretRef:
           name: devops-secret
@@ -29,12 +27,18 @@ spec:
       - containerPort: 443
       - containerPort: 636
 
-  # - name: upstream-api
-  #   image: samirgandhi/dg-qa-upstream-api
-  #   ports:
-  #     - containerPort: 3000
+  - name: upstream-api
+    image: samirgandhi/dg-qa-upstream-api
+    ports:
+      - containerPort: 3000
 
-  # - name: dataconsole
-  #   image: 'pingidentity/pingdataconsole:edge'
-  #   ports:
-  #     - containerPort: 8443 
+  - name: dataconsole
+    image: pingidentity/pingdataconsole:edge
+    ports:
+      - containerPort: 8443 
+
+  - name: jmeter
+    image: justb4/jmeter:latest
+    tty: true
+    command:
+      - "cat"
