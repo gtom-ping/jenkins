@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: DG Performance Pod
+  name: dg-performance-pod
   labels:
     name: dg-performance-pod
 spec:
@@ -10,7 +10,8 @@ spec:
     # image: 574076504146.dkr.ecr.us-west-2.amazonaws.com/snapshot-builds/pingdatagovernance:latest
     # image: '574076504146.dkr.ecr.us-west-2.amazonaws.com/snapshot-builds/pingdatagovernance:8.3.0.0-SNAPSHOT-alpine-az11-20210112'
     image: pingidentity/pingdatagovernance:latest
-    envs: 
+    imagePullPolicy: Always
+    env: 
       - name: SERVER_PROFILE_URL
         value: https://github.com/pingidentity/pingidentity-server-profiles.git
       - name: SERVER_PROFILE_PATH
@@ -23,18 +24,17 @@ spec:
       - secretRef:
           name: devops-secret
           optional: true
-    alwaysPullImage: true
     ports:
       - containerPort: 80
       - containerPort: 443
       - containerPort: 636
 
-  - name: upstream-api
-    image: samirgandhi/dg-qa-upstream-api
-    ports:
-      - containerPort: 3000
+  # - name: upstream-api
+  #   image: samirgandhi/dg-qa-upstream-api
+  #   ports:
+  #     - containerPort: 3000
 
-  - name: dataconsole
-    image: 'pingidentity/pingdataconsole:edge'
-    ports:
-      - containerPort: 8443 
+  # - name: dataconsole
+  #   image: 'pingidentity/pingdataconsole:edge'
+  #   ports:
+  #     - containerPort: 8443 
