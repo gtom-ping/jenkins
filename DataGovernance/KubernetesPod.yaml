@@ -21,6 +21,10 @@ spec:
         value: "${PING_IDENTITY_DEVOPS_USER}"
       - name: PING_IDENTITY_DEVOPS_KEY
         value: "${PING_IDENTITY_DEVOPS_KEY}"
+      - envFrom:
+        - secretRef:
+            name: devops-secret
+            optional: true
     alwaysPullImage: true
     ports:
       - containerPort: 80
