@@ -17,24 +17,15 @@ spec:
         value: "getting-started/pingdatagovernance"
       - name: PING_IDENTITY_ACCEPT_EULA
         value: "YES"
-      - name: PING_IDENTITY_DEVOPS_USER
-        value: "${PING_IDENTITY_DEVOPS_USER}"
-      - name: PING_IDENTITY_DEVOPS_KEY
-        value: "${PING_IDENTITY_DEVOPS_KEY}"
-      - envFrom:
-        - secretRef:
-            name: devops-secret
-            optional: true
+    envFrom:
+      - secretRef:
+          name: devops-secret
+          optional: true
     alwaysPullImage: true
     ports:
       - containerPort: 80
       - containerPort: 443
       - containerPort: 636
-
-  - name: jmeter
-    image: justb4/jmeter
-    ttyEnabled: true
-    command: ["cat"]
 
   - name: upstream-api
     image: samirgandhi/dg-qa-upstream-api
