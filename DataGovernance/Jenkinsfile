@@ -1,6 +1,7 @@
 pipeline {
-    configFileProvider([configFile(fileId: 'DEVOPS_KEY', targetLocation: 'env_vars')]) {
-        sh 'cat env_vars'
+    environment { 
+        PING_IDENTITY_DEVOPS_USER = 'blah'
+        PING_IDENTITY_DEVOPS_KEY = 'blah'
     }
 
     agent {
