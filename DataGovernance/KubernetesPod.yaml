@@ -14,7 +14,7 @@ spec:
       - name: SERVER_PROFILE_URL
         value: "https://github.com/pingidentity/pingidentity-server-profiles.git"
       - name: SERVER_PROFILE_PATH
-        value: "perf-testing/pingdatagovernance"
+        value: "baseline/pingdatagovernance"
       - name: PING_IDENTITY_ACCEPT_EULA
         value: "YES"
     envFrom:
