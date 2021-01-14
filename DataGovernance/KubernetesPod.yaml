@@ -17,8 +17,8 @@ spec:
         value: "perf-testing/pingdatagovernance"
       - name: PING_IDENTITY_ACCEPT_EULA
         value: "YES"
-      - name: SERVER_PROFILE_BRANCH
-        value: "dg-root-pw"
+      # - name: SERVER_PROFILE_BRANCH
+      #   value: "dg-root-pw"
     envFrom:
       - secretRef:
           name: devops-secret
