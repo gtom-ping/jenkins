@@ -1,10 +1,9 @@
 pipeline {
-    environment { 
-        PING_IDENTITY_DEVOPS_USER = 'blah'
-        PING_IDENTITY_DEVOPS_KEY = 'blah'
-    }
-
     agent {
+        environment { 
+            PING_IDENTITY_DEVOPS_USER = 'blah'
+            PING_IDENTITY_DEVOPS_KEY = 'blah'
+        }
         kubernetes {
             yamlFile 'DataGovernance/KubernetesPod.yaml'
         }
