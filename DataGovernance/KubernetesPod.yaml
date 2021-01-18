@@ -19,9 +19,11 @@ spec:
     imagePullPolicy: Always
     env: 
       - name: SERVER_PROFILE_URL
-        value: https://github.com/pingidentity/pingidentity-server-profiles.git
+        # value: https://github.com/pingidentity/pingidentity-server-profiles.git
+        value: https://github.com/gtom-ping/pingidentity-server-profiles.git
       - name: SERVER_PROFILE_PATH
-        value: perf-testing/pingdatagovernance
+        # value: perf-testing/pingdatagovernance
+        value: pingdatagovernance
       - name: PING_IDENTITY_ACCEPT_EULA
         value: "YES"
     envFrom:
@@ -32,8 +34,8 @@ spec:
       - containerPort: 80
       - containerPort: 443
       - containerPort: 636
-    args:
-      - "/etc/hosts"
+    # args:
+    #   - "/etc/hosts"
 
   - name: upstream-api
     image: samirgandhi/dg-qa-upstream-api
