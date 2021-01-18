@@ -5,8 +5,14 @@ metadata:
   labels:
     name: dg-performance-pod
 spec:
+  hostAliases:
+    - ip: "127.0.0.1"
+      hostnames:
+        - pingdatagovernance
+        - upstream-api
+        - pingdataconsole
   containers:
-  - name: datagovernance
+  - name: pingdatagovernance
     image: 574076504146.dkr.ecr.us-west-2.amazonaws.com/snapshot-builds/pingdatagovernance:latest
     # image: '574076504146.dkr.ecr.us-west-2.amazonaws.com/snapshot-builds/pingdatagovernance:8.3.0.0-SNAPSHOT-alpine-az11-20210112'
     # image: pingidentity/pingdatagovernance:latest
@@ -26,13 +32,15 @@ spec:
       - containerPort: 80
       - containerPort: 443
       - containerPort: 636
+    args:
+      - "/etc/hosts"
 
   - name: upstream-api
     image: samirgandhi/dg-qa-upstream-api
     ports:
       - containerPort: 3000
 
-  - name: dataconsole
+  - name: pingdataconsole
     image: pingidentity/pingdataconsole:edge
     ports:
       - containerPort: 8443 
