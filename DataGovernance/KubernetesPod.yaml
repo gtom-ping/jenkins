@@ -41,8 +41,8 @@ spec:
       - containerPort: 636
     resources:
       limits:
-        memory: 2Gi
-        cpu: 2
+        memory: 3Gi
+        cpu: 3
 
   - name: upstream-api
     image: samirgandhi/dg-qa-upstream-api
@@ -53,14 +53,14 @@ spec:
         memory: 2Gi
         cpu: 2
 
-  - name: pingdataconsole
-    image: pingidentity/pingdataconsole:edge
-    ports:
-      - containerPort: 8443 
-    resources:
-      limits:
-        memory: 1Gi
-        cpu: 1
+  # - name: pingdataconsole
+  #   image: pingidentity/pingdataconsole:edge
+  #   ports:
+  #     - containerPort: 8443 
+  #   resources:
+  #     limits:
+  #       memory: 1Gi
+  #       cpu: 1
 
   - name: jmeter
     image: justb4/jmeter:latest
