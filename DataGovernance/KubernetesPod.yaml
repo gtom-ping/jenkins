@@ -41,8 +41,8 @@ spec:
       - containerPort: 636
     resources:
       limits:
-        memory: 2Gi
-        cpu: 2
+        memory: 4Gi
+        cpu: 4
 
   - name: upstream-api
     image: samirgandhi/dg-qa-upstream-api
@@ -69,5 +69,5 @@ spec:
       - "cat"
     resources:
       limits:
-        memory: 2Gi
-        cpu: 2
+        memory: 4Gi
+        cpu: 4
