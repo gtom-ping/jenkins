@@ -6,12 +6,28 @@ pipeline {
     }
 
     stages {
-        stage('Run JMeter Test') {
+        stage('Clone JMeter Scripts') {
             steps {
                 container('jmeter') {
                     git branch: 'main', url: 'https://github.com/gtom-ping/jmx-files'
-                    sh '${JMETER_BIN}/jmeter -n -t SanityCheck8443.jmx -l results.csv'
-                    perfReport errorFailedThreshold: 0, sourceDataFiles: 'results.csv'
+                }
+            }
+        }
+
+        stage('Deny based on Access Token - Allow') {
+            steps {
+                container('jmeter') {
+                    sh '${JMETER_BIN}/jmeter -n -t access-api.jmx -l access-api.csv'
+                    perfReport errorFailedThreshold: 0, sourceDataFiles: 'access-api.csv'
+                }
+            }
+        }
+
+        stage('Deny based on Access Token - Deny') {
+            steps {
+                container('jmeter') {
+                    sh '${JMETER_BIN}/jmeter -n -t deny-api.jmx -l deny-api.csv'
+                    perfReport errorFailedThreshold: 0, sourceDataFiles: 'deny-api.csv'
                 }
             }
         }
