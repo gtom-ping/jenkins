@@ -18,16 +18,19 @@ pipeline {
             steps {
                 container('jmeter') {
                     sh '${JMETER_BIN}/jmeter -n -f -t access-api.jmx -l access-api.csv -q test.properties'
-                    perfReport errorFailedThreshold: 0, sourceDataFiles: 'access-api.csv'
+                    // perfReport errorFailedThreshold: 0, sourceDataFiles: 'access-api.csv'
+                    perfReport compareBuildPrevious: true, configType: 'PRT', graphType: 'PRT', modePerformancePerTestCase: true, modeThroughput: true, sourceDataFiles: 'access-api.csv'
                 }
             }
         }
+        
 
         stage('Deny based on Access Token - Deny') {
             steps {
                 container('jmeter') {
                     sh '${JMETER_BIN}/jmeter -n -f -t deny-api.jmx -l deny-api.csv -q test.properties'
-                    perfReport errorFailedThreshold: 0, sourceDataFiles: 'deny-api.csv'
+                    // perfReport errorFailedThreshold: 0, sourceDataFiles: 'deny-api.csv'
+                    perfReport compareBuildPrevious: true, configType: 'PRT', graphType: 'PRT', modePerformancePerTestCase: true, modeThroughput: true, sourceDataFiles: 'deny-api.csv'
                 }
             }
         }
